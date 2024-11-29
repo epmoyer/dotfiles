@@ -1,0 +1,128 @@
+# ------------------------------------------
+# Default User
+# ------------------------------------------
+# Set default user (zsh prompt will not show user when it is the default)
+export DEFAULT_USER='eric'
+
+# ------------------------------------------
+# voyager customizations
+# ------------------------------------------
+export VGER_DEFAULT_USER=$DEFAULT_USER
+
+# ------------------------------------------
+# Colorize man pages
+# ------------------------------------------
+export LESS_TERMCAP_mb=$'\e[1;32m'
+export LESS_TERMCAP_md=$'\e[1;32m'
+export LESS_TERMCAP_me=$'\e[0m'
+export LESS_TERMCAP_se=$'\e[0m'
+export LESS_TERMCAP_so=$'\e[01;33m'
+export LESS_TERMCAP_ue=$'\e[0m'
+export LESS_TERMCAP_us=$'\e[1;4;31m'
+
+# ------------------------------------------
+# Aliases
+# ------------------------------------------
+
+# ls
+alias ls='ls -G --color=auto'
+alias ll='ls -altrh --color=auto'
+alias lll='ls -altrh --color=auto'
+
+# vi
+alias vi='vim'
+
+# git log
+alias gl="git log --graph --abbrev-commit --decorate -10 --format=format:'%C(green)%h%C(dim white) - %C(reset)%s%C(reset) %C(dim white)-%C(reset)%C(yellow)%d%C(reset) %C(blue)(%ar)%C(reset) %C(dim)- %an'"
+
+# git log (full
+alias glf="git log --graph --abbrev-commit --decorate --format=format:'%C(green)%h%C(reset) - %C(cyan)%aD%C(reset) %s%C(reset) %C(dim white)-%C(reset)%C(yellow)%d%C(reset) %C(blue)(%ar)%C(reset) %C(dim)- %an' --all"
+
+# git status
+alias gs='git status'
+
+# git diff (with difftastic)
+alias gd='GIT_EXTERNAL_DIFF=difft git diff'
+
+# python virtual environment activation
+alias activ='source ./venv/bin/activate'
+
+# catcert ant catpkcs
+alias catcert='openssl x509 -text -noout -in'
+alias catpkcs='openssl pkcs12  -info -in'
+
+# Show all colors for 256 color mode
+c256 () {
+   for COLOR in {1..255}; do echo -en "\e[38;5;${COLOR}m${COLOR} "; done; echo;
+   for COLOR in {1..255}; do echo -en "\e[48;5;${COLOR}m${COLOR} "; done; echo;
+}
+
+# Do not highlight text pasted at the command line
+zle_highlight+=(paste:none)
+
+# Don't store commands starting with a space in history
+export HIST_IGNORE_SPACE=1
+
+# ------------------------
+
+setopt histignorealldups sharehistory
+
+# Use emacs keybindings even if our EDITOR is set to vi
+#bindkey -e
+
+# Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
+HISTSIZE=1000
+SAVEHIST=1000
+HISTFILE=~/.zsh_history
+
+# Use modern completion system
+autoload -Uz compinit
+compinit
+
+zstyle ':completion:*' auto-description 'specify: %d'
+zstyle ':completion:*' completer _expand _complete _correct _approximate
+zstyle ':completion:*' format 'Completing %d'
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' menu select=2
+eval "$(dircolors -b)"
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' list-colors ''
+zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
+zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=* l:|=*'
+zstyle ':completion:*' menu select=long
+zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
+zstyle ':completion:*' use-compctl false
+zstyle ':completion:*' verbose true
+
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
+
+# voyager:start ---------------------------------------------------------------
+builtin source "$HOME/.voyager/zshrc.init.zsh"
+# voyager:end -----------------------------------------------------------------
+
+# majortom:start ---------------------------------------------------------------
+
+# To override the default config file name/location uncomment the following line
+# and point it to your desired config file. 
+# export MAJORTOM_CONFIG="~/.config/majortom/majortom_config.json"
+
+# The to() function runs majortom (with all supplied arguments) and if majortom
+# returns a path then cd's to that path.
+to () {
+    result=$(majortom $@ )
+    if [[ $result = :* ]]
+    then
+        # A path was returned (prefixed by ":"). Print it, and then cd to it.
+        result="${result:1}"
+        echo "$result"
+        cd "$result"
+    else
+        # Print the result if non-blank
+        if test "$result"
+        then
+            echo "$result"
+        fi
+    fi
+}
+# majortom:end -----------------------------------------------------------------
