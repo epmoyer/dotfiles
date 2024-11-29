@@ -43,7 +43,7 @@ alias gs='git status'
 
 # git diff (with difftastic)
 alias gd='GIT_EXTERNAL_DIFF=difft git diff'
-#alias gd='git diff'
+#alias gd='git diff' # standard
 
 # git commit
 alias gcam='git commit -a -m $1'
@@ -130,3 +130,8 @@ to () {
     fi
 }
 # majortom:end -----------------------------------------------------------------
+
+# Atuin
+. "$HOME/.atuin/bin/env"
+eval "$(atuin init zsh)"
+
