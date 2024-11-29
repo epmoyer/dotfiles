@@ -138,7 +138,7 @@ alias gs='git status'
 alias gcam='git commit -a -m $1'
 
 # git diff
-alias gd='gcam git diff'
+alias gd='git diff'
 
 # batcat
 alias bat='batcat'

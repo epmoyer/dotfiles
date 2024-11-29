@@ -43,6 +43,10 @@ alias gs='git status'
 
 # git diff (with difftastic)
 alias gd='GIT_EXTERNAL_DIFF=difft git diff'
+#alias gd='git diff'
+
+# git commit
+alias gcam='git commit -a -m $1'
 
 # python virtual environment activation
 alias activ='source ./venv/bin/activate'
