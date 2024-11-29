@@ -135,3 +135,7 @@ to () {
 . "$HOME/.atuin/bin/env"
 eval "$(atuin init zsh)"
 
+# Yubikey Support
+export GPG_TTY=$(tty)
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+
