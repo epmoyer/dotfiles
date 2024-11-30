@@ -143,5 +143,5 @@ eval "$(atuin init zsh)"
 export GPG_TTY=$(tty)
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 
-# (git push test2)
+# (git push test3)
 
