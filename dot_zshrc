@@ -143,5 +143,8 @@ eval "$(atuin init zsh)"
 export GPG_TTY=$(tty)
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 
+# Add .local/bin to path (for Zed editor, etc.) 
+export PATH=$HOME/.local/bin:$PATH
+
 # (git push test5)
 
