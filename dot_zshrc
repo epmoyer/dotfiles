@@ -146,5 +146,7 @@ export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 # Add .local/bin to path (for Zed editor, etc.) 
 export PATH=$HOME/.local/bin:$PATH
 
-# (git push test5)
+# Fix option-left and option-right key bingings (for PopOs 22.04)
+bindkey '^[^[[D' backward-word
+bindkey '^[^[[C' forward-word
 
