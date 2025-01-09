@@ -59,6 +59,8 @@ alias catpkcs='openssl pkcs12  -info -in'
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
 
+alias bat=batcat
+
 # Show all colors for 256 color mode
 c256 () {
    for COLOR in {1..255}; do echo -en "\e[38;5;${COLOR}m${COLOR} "; done; echo;
